@@ -12,6 +12,9 @@ setTimeout(function(){
 	var body = document.getElementsByTagName('body')[0];
 
 
+	var websiteBgColor = (localStorage.websiteBg) ? localStorage.websiteBg : '#eee';
+
+
 	metaCharset = document.createElement('meta');
 	metaCharset.setAttribute('charset', 'UTF-8');
 	head.prepend(metaCharset);
@@ -41,11 +44,10 @@ setTimeout(function(){
 
 
 	style = document.createElement('style');
-	style.innerHTML = 'body{background-color:#eee;}';
-	// style.innerHTML = 'body{background-color:red;}';
+	style.innerHTML = `body{background-color:${websiteBgColor};}`;
 	style.type = 'text/css';
 	head.append(style);
-	 
+
 
 	headingOne = document.createElement('h1');
 	headingOne.innerHTML = 'Heading One';
@@ -86,5 +88,31 @@ setTimeout(function(){
 	image.style.textAlign = 'center';
 	body.append(image);
 	
+
+	if (!getCookie('name') || getCookie('name') == 'null') {
+		promptInput = prompt('Your Name Please?', "");
+		toStoreInCookie = 'name=' + promptInput;
+		document.cookie = toStoreInCookie;
+	};
+	name = getCookie('name') ? getCookie('name') : 'Guest';
+	headingOneUpdated = document.getElementsByTagName('h1')[0]; 
+	headingOneUpdated.innerHTML = 'Hello ' + name;
+
+
+	colorInput = document.createElement('input');
+	colorInput.type = 'color';
+	colorInput.name = 'colorName';
+	colorInput.style.display = 'block';
+	colorInput.id = 'colorNameId';
+	body.append(colorInput);
+
+	document.getElementById('colorNameId').onchange = function(){
+		localStorage.websiteBg = this.value;
+		style = document.getElementsByTagName('style')[0];
+		style.innerHTML = `body{background-color:${this.value};}`;
+	};
+
+
+
 
 }, 0);
