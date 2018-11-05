@@ -3,7 +3,7 @@
 */
 
 
-setTimeout(function(){
+window.onload = function (){
 
 
 	const APPNAME = 'A JavaScript DOM Web Page';
@@ -113,6 +113,4 @@ setTimeout(function(){
 	};
 
 
-
-
-}, 0);
+};
